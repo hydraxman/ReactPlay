@@ -8,10 +8,30 @@ const htmlPlugin = new HtmlWebPackPlugin({
 
 module.exports = {
     mode: "development",
+    output: {
+        path: path.join(__dirname, './dist'),
+        filename: 'bundle.js'
+    },
     devServer: {
         port: 9999
     },
     plugins: [
         htmlPlugin
-    ]
+    ],
+    module: {
+        rules: [
+            { test: /\.js|jsx$/, use: 'babel-loader', exclude: /node_modules/ },
+            {
+                test: /\.js$/,
+                enforce: 'pre',
+                use: ['source-map-loader'],
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '.json'],
+        alias: {
+            '@': path.join(__dirname, '/src')
+        }
+    }
 }
