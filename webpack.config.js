@@ -25,6 +25,26 @@ module.exports = {
                 test: /\.js$/,
                 enforce: 'pre',
                 use: ['source-map-loader'],
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' }
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    { loader: 'style-loader' },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: { localIdentName: '[path]-[name]-[local]-[hash:6]' }
+                        }
+                    },
+                    { loader: 'sass-loader' }
+                ]
             }
         ]
     },

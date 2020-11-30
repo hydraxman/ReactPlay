@@ -3,7 +3,7 @@ console.log("a new webpack project, welcome")
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import MyComponent from '@/component/MyComponent'
+import MyComponent,{DeviceProfile} from '@/component/MyComponent'
 // create a virtual Dom element
 
 var link = React.createElement('a', { href: 'http://www.baidu.com' }, 'baidu')
@@ -31,7 +31,8 @@ var jsxElement =
     <div>
         this is a jsx element, {redSpan},{list}
         <Hello {...dog} />
-        <MyComponent val='abc' />
+        <MyComponent val='This is a component' /><br/>
+        <DeviceProfile/>
     </div>
 
 
