@@ -50,9 +50,9 @@ export class DeviceProfile extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://minint-shbrova.fareast.corp.microsoft.com:8886/device_portal//api/test/recipient/list').then(res => {
+        axios.get('http://minint-shbrova.fareast.corp.microsoft.com:8886/device_portal/api/device/list').then(res => {
             this.setState({
-                toList: res.data.content.map((item) => <span>{item.to}<br/></span>)
+                toList: <table className="table table-striped table-bordered"><tbody>{res.data.content.map((item) => <tr><td>{item.name}</td><td>{item.deviceId}</td><td>{item.osSDKInt}</td></tr>)}</tbody></table>
              })
         })
     }
