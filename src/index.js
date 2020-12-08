@@ -35,6 +35,4 @@ var jsxElement =
         <DeviceProfile/>
     </div>
 
-
-
 ReactDOM.render(jsxElement, document.getElementById('app'))
