@@ -24,36 +24,53 @@ export class DeviceProfile extends React.Component {
 
     render() {
         const { toList } = this.state;
-        var cols = ['Device name', 'Serial Number']
         return <div className="container">
             <span className="btn btn-sm btn-info" onClick={() => {
                 alert('Hi!')
             }}>Hit it!</span><br />
             <img src="https://how2j.cn/example.gif" className="img-rounded"></img>
             <img src="https://how2j.cn/example.gif" className="img-thumbnail"></img>
-            <div className="jumbotron">
-                <h1>Bootstrap jumbotron</h1>
-                <p>Resizable and responsive</p>
-            </div>
-            <table className="table table-striped table-bordered">
-                <tbody>
-                    <tr>
-                        {cols.map((item) => <th key={item}>{item}</th>)}
-                    </tr>
-                    <tr>
-                        {cols.map((item) => <td key={item}>{item}</td>)}
-                    </tr>
-                </tbody>
-            </table>
             {toList}
         </div>
     }
 
     componentDidMount() {
-        axios.get('http://minint-shbrova.fareast.corp.microsoft.com:8886/device_portal/api/device/list').then(res => {
+        axios.get('/api/device/list').then(res => {
             this.setState({
-                toList: <table className="table table-striped table-bordered"><tbody>{res.data.content.map((item) => <tr><td>{item.name}</td><td>{item.deviceId}</td><td>{item.osSDKInt}</td></tr>)}</tbody></table>
-             })
+                toList: <table className="table table-striped table-bordered">
+                    <tbody>
+                        <tr>
+                            <td colSpan='4'>
+                                <div className="jumbotron">
+                                    <h1>Bootstrap jumbotron</h1>
+                                    <p>Resizable and responsive</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Screenshot</td>{res.data.content.map((item) => <td><img className={cssObj.device_screenshot} src={item.imageRelPath}></img></td>)}
+                        </tr>
+                        <tr>
+                            <td>Name</td>{res.data.content.map((item) => <td>{item.name}</td>)}
+                        </tr>
+                        <tr>
+                            <td>Device ID</td>{res.data.content.map((item) => <td>{item.deviceId}</td>)}
+                        </tr>
+                        <tr>
+                            <td>Display metrics</td>{res.data.content.map((item) => <td>{item.screenSize}</td>)}
+                        </tr>
+                        <tr>
+                            <td>Status</td>{res.data.content.map((item) => <td>{item.status}</td>)}
+                        </tr>
+                        <tr>
+                            <td>Is testing</td>{res.data.content.map((item) => <td>{item.testing.toString()}</td>)}
+                        </tr>
+                        <tr>
+                            <td>OS version code</td>{res.data.content.map((item) => <td>{item.osSDKInt}</td>)}
+                        </tr>
+                    </tbody>
+                </table>
+            })
         })
     }
 

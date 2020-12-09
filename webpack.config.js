@@ -13,7 +13,11 @@ module.exports = {
         filename: 'bundle.js'
     },
     devServer: {
-        port: 9999
+        port: 9999,
+        proxy:{
+            '/api': 'http://minint-shbrova.fareast.corp.microsoft.com:8886/device_portal',
+            '/device': 'http://minint-shbrova.fareast.corp.microsoft.com:8886/device_portal'
+        }
     },
     plugins: [
         htmlPlugin
